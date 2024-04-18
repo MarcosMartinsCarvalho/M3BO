@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class playsound : MonoBehaviour
 {
-
     AudioSource source;
 
     public int timer = 0;
-    public bool kusjeaanhetgeven = false ;
+    public bool kusjeaanhetgeven = false;
 
     Collider soundTrigger;
 
@@ -20,13 +20,18 @@ public class playsound : MonoBehaviour
 
     private void Update()
     {
-        if(kusjeaanhetgeven == true)
+        if (kusjeaanhetgeven == true)
         {
             timer++;
         }
-        
+        if (kusjeaanhetgeven == false)
+        {
+            timer = 0;
+            
+        }
     }
-    // Start is called before the first frame update
+    
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -34,20 +39,15 @@ public class playsound : MonoBehaviour
             kusjeaanhetgeven = true;
             source.Play();
         }
-
-        
     }
 
     private void OnTriggerExit(Collider other)
     {
-
         if (other.CompareTag("Player"))
         {
             timer = 0;
             kusjeaanhetgeven = false;
             source.Stop();
         }
-        
-        
     }
 }

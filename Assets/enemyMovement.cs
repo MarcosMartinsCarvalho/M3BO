@@ -10,11 +10,11 @@ public class EnemyMovement : MonoBehaviour
     public int countdown = 0;
     public bool countdownStarted = true;
     public Canvas kusje1;
-    
+
 
     void Start()
     {
-        
+
         Application.targetFrameRate = 60;
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -25,21 +25,7 @@ public class EnemyMovement : MonoBehaviour
     {
         agent.SetDestination(player.position);
 
-        if (countdownStarted)
-        {
-            countdown++;
-        }
-
-        if (countdown >= 399)
-        {
-            kusje1.enabled = false;
-            countdown = 0;
-        }
-
-        if (countdown >= 179)
-        {
-            kusje1.enabled = true;
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -53,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
+
         kusje1.enabled = false;
         closeToPlayer = false;
         agent.speed = 1.5f;
